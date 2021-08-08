@@ -7,7 +7,12 @@ fs.readFile('/Users/vincentsolaberrieta/.sophia/tokens.json', 'utf8', function (
 //  console.log(oauth);
   for (let i = 0; i < oauth.length ; i++){
 //	  console.log(decodeToken(oauth[i].tokens.accessToken));
-    oauth[i].tokens["decodedAccessToken"] = decodeToken(oauth[i].tokens.accessToken);
+    var decodedToken = decodeToken(oauth[i].tokens.accessToken);
+    decodedToken.payload.nbf = new Date(1000 * decodedToken.payload.nbf);
+    decodedToken.payload.auth_time = new Date(1000 * decodedToken.payload.auth_time);
+    decodedToken.payload.exp = new Date(1000 * decodedToken.payload.exp);
+    decodedToken.payload.iat = new Date(1000 * decodedToken.payload.iat);
+    oauth[i].tokens["decodedAccessToken"] = decodedToken 
     oauth[i].tokens["decodedRefreshToken"] = decodeToken(oauth[i].tokens.refreshToken);
   }
   console.log(JSON.stringify(oauth));

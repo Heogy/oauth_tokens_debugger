@@ -1,0 +1,5 @@
+- make it a CLI
+  - input and output in options
+- make it a bash cmd:
+  - alias
+  - npm -g command
