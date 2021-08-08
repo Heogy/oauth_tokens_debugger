@@ -1,5 +1,16 @@
+#!/usr/bin/env node
+
+const yargs = require('yargs/yargs')
+const { hideBin } = require('yargs/helpers')
+const argv = yargs(hideBin(process.argv)).argv
+
+var inputFile = process.env.HOME + '/.sophia/tokens.json';
+if (argv.input){
+  inputFile = argv.input;
+}
+
 fs = require('fs')
-fs.readFile('tokens.json', 'utf8', function (err,data) {
+fs.readFile(inputFile, 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
