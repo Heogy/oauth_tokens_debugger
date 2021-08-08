@@ -1,5 +1,5 @@
 fs = require('fs')
-fs.readFile('/Users/vincentsolaberrieta/.sophia/tokens.json', 'utf8', function (err,data) {
+fs.readFile('tokens.json', 'utf8', function (err,data) {
   if (err) {
     return console.log(err);
   }
@@ -12,8 +12,8 @@ fs.readFile('/Users/vincentsolaberrieta/.sophia/tokens.json', 'utf8', function (
     decodedToken.payload.auth_time = new Date(1000 * decodedToken.payload.auth_time);
     decodedToken.payload.exp = new Date(1000 * decodedToken.payload.exp);
     decodedToken.payload.iat = new Date(1000 * decodedToken.payload.iat);
-    oauth[i].tokens["decodedAccessToken"] = decodedToken 
-    oauth[i].tokens["decodedRefreshToken"] = decodeToken(oauth[i].tokens.refreshToken);
+    oauth[i].tokens.accessToken = decodedToken 
+    oauth[i].tokens.refreshToken = decodeToken(oauth[i].tokens.refreshToken);
   }
   console.log(JSON.stringify(oauth));
 });
