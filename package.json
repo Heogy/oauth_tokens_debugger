@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "yargs": "^17.1.0"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.3"
+  },
+  "name": "oauth2-decode",
+  "version": "1.0.0",
+  "description": "an oauth tokens debugger",
+  "main": "oauth2_decode.js",
+  "scripts": {
+    "test": "mocha **/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heogy/oauth_tokens_debugger.git"
+  },
+  "author": "heog",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Heogy/oauth_tokens_debugger/issues"
+  },
+  "homepage": "https://github.com/Heogy/oauth_tokens_debugger#readme"
+}
