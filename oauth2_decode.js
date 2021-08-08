@@ -4,7 +4,7 @@ const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
 
-var inputFile = process.env.HOME + '/.sophia/tokens.json';
+var inputFile = 'tokens.json';
 if (argv.input){
   inputFile = argv.input;
 }
@@ -17,12 +17,17 @@ fs.readFile(inputFile, 'utf8', function (err,data) {
   var oauth = JSON.parse(data);
 //  console.log(oauth);
   for (let i = 0; i < oauth.length ; i++){
-//	  console.log(decodeToken(oauth[i].tokens.accessToken));
     var decodedToken = decodeToken(oauth[i].tokens.accessToken);
-    decodedToken.payload.nbf = new Date(1000 * decodedToken.payload.nbf);
-    decodedToken.payload.auth_time = new Date(1000 * decodedToken.payload.auth_time);
-    decodedToken.payload.exp = new Date(1000 * decodedToken.payload.exp);
-    decodedToken.payload.iat = new Date(1000 * decodedToken.payload.iat);
+
+    if (decodedToken.payload.nbf)
+      decodedToken.payload.nbf = new Date(1000 * decodedToken.payload.nbf);
+    if (decodedToken.payload.auth_time)
+      decodedToken.payload.auth_time = new Date(1000 * decodedToken.payload.auth_time);
+    if (decodedToken.payload.exp)
+      decodedToken.payload.exp = new Date(1000 * decodedToken.payload.exp);
+    if (decodedToken.payload.iat)
+      decodedToken.payload.iat = new Date(1000 * decodedToken.payload.iat);
+
     oauth[i].tokens.accessToken = decodedToken 
     oauth[i].tokens.refreshToken = decodeToken(oauth[i].tokens.refreshToken);
   }
